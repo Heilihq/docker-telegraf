@@ -30,7 +30,7 @@ steps:
   args:
   - set
   - image
-  - deployment
+  - daemonset
   - telegraf
   - telegraf=gcr.io/$PROJECT_ID/telegraf:$TAG_NAME
   env:
