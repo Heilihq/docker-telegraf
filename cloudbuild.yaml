@@ -10,21 +10,6 @@ steps:
   args:
   - 'push'
   - 'gcr.io/$PROJECT_ID/telegraf:$TAG_NAME'
-# Get kube credentials manualy
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'config'
-  - 'set'
-  - 'container/use_v1_api_client'
-  - 'false'
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - 'beta'
-  - 'container'
-  - 'clusters'
-  - 'get-credentials'
-  - '--region=us-central1'
-  - 'heili-us-central1'
 # Deploy ot Heili cluster
 - name: 'gcr.io/cloud-builders/kubectl'
   args:
@@ -34,7 +19,7 @@ steps:
   - telegraf
   - telegraf=gcr.io/$PROJECT_ID/telegraf:$TAG_NAME
   env:
-  - 'CLOUDSDK_COMPUTE_REGION=us-central1'
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=heili-us-central1'
 images:
 - 'gcr.io/$PROJECT_ID/telegraf:$TAG_NAME'
